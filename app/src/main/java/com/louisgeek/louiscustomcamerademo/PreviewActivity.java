@@ -50,6 +50,14 @@ public class PreviewActivity extends Activity {
             String filePath = intent.getStringExtra("filePath");
             // Toast.makeText(this, "图片加载filePath:"+filePath, Toast.LENGTH_SHORT).show();
             id_iv_preview_photo.setImageBitmap(getBitmapByUrl(filePath));
+            //保存图片
+            boolean isSaveSuccess = ImgUtils.saveImageToGallery(PreviewActivity.this, getBitmapByUrl(filePath));
+            if (isSaveSuccess) {
+                Toast.makeText(PreviewActivity.this, "保存图片成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(PreviewActivity.this, "保存图片失败，请稍后重试", Toast.LENGTH_SHORT).show();
+            }
+
         } else {
             Toast.makeText(this, "图片加载错误", Toast.LENGTH_SHORT).show();
         }
